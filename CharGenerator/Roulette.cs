@@ -7,7 +7,7 @@ namespace CharGenerator
 {
 	public static class Roulette
 	{
-		public static T Spin<T>(IRandom random, IList<T> items, IList<int> weights, out int idx)
+		public static T Spin<T>(IRandom random, IList<T> items, IList<int> weights)
 		{
 			if (items.Count != weights.Count)
 			{
@@ -24,15 +24,11 @@ namespace CharGenerator
 				currentSector += weights[i];
 				if (randomNum <= currentSector)
 				{
-					idx = i;
 					return items[i];
 				}
 			}
 
 			throw new Exception("Случайное число оказалось вне отрезка");
 		}
-
-		public static T Spin<T>(IRandom random, IList<T> items, IList<int> weights) =>
-			Spin(random, items, weights, out _);
 	}
 }
