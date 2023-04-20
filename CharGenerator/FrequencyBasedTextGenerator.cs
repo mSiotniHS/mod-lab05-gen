@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using CharGenerator.Helpers;
 
 namespace CharGenerator
@@ -11,6 +12,11 @@ namespace CharGenerator
 
 		public FrequencyBasedTextGenerator(IRandom random, string[] items, int[] weights)
 		{
+			if (items.Length != weights.Length)
+			{
+				throw new ArgumentException("items and weights are of different sizes", nameof(weights));
+			}
+
 			_items = items;
 			_weights = weights;
 			_random = random;
