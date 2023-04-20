@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using CharGenerator.Helpers;
 
 namespace CharGenerator
 {
@@ -7,15 +8,17 @@ namespace CharGenerator
 	{
 		private readonly char[] _alphabet;
 		private readonly int[][] _frequencyMatrix;
+		private readonly IRandom _random;
 
-		public BigramBasedTextGenerator(char[] alphabet, int[][] frequencyMatrix)
+		public BigramBasedTextGenerator(IRandom random, char[] alphabet, int[][] frequencyMatrix)
 		{
 			_alphabet = alphabet;
 			_frequencyMatrix = frequencyMatrix;
+			_random = random;
 		}
 
 		private char NextCharacter(char previousLetter) =>
-			Roulette.Spin(_alphabet, _frequencyMatrix[Array.IndexOf(_alphabet, previousLetter)]);
+			Roulette.Spin(_random, _alphabet, _frequencyMatrix[Array.IndexOf(_alphabet, previousLetter)]);
 
 		public string GenerateText(uint length, char firstLetter)
 		{

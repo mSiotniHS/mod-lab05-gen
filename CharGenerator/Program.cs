@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using CharGenerator.Helpers;
 
 namespace CharGenerator
 {
@@ -10,6 +11,8 @@ namespace CharGenerator
 		private static readonly string Task1File = Path.Combine(OutDir, "task1.txt");
 		private static readonly string Task2File = Path.Combine(OutDir, "task2.txt");
 		private static readonly string Task3File = Path.Combine(OutDir, "task3.txt");
+
+		private static readonly IRandom Random = new Helpers.Random();
 
 		private static void Main()
 		{
@@ -37,7 +40,7 @@ namespace CharGenerator
 					.ToArray())
 				.ToArray();
 
-			var generator = new BigramBasedTextGenerator(alphabet, frequencyMatrix);
+			var generator = new BigramBasedTextGenerator(Random, alphabet, frequencyMatrix);
 			File.WriteAllText(Task1File, generator.GenerateText(1200, 'я'));
 
 		}
@@ -58,7 +61,7 @@ namespace CharGenerator
 			var words = rows.Select(row => row.Item1).ToArray();
 			var weights = rows.Select(row => row.Item2).ToArray();
 
-			var generator = new FrequencyBasedTextGenerator(words, weights);
+			var generator = new FrequencyBasedTextGenerator(Random, words, weights);
 			File.WriteAllText(Task2File, generator.GenerateText(1000));
 		}
 
@@ -78,7 +81,7 @@ namespace CharGenerator
 			var pairs = rows.Select(row => row.Item1).ToArray();
 			var weights = rows.Select(row => row.Item2).ToArray();
 
-			var generator = new FrequencyBasedTextGenerator(pairs, weights);
+			var generator = new FrequencyBasedTextGenerator(Random, pairs, weights);
 			File.WriteAllText(Task3File, generator.GenerateText(500));
 
 		}
