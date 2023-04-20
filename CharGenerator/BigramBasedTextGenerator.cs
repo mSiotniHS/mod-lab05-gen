@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using CharGenerator.Helpers;
 
@@ -12,6 +13,28 @@ namespace CharGenerator
 
 		public BigramBasedTextGenerator(IRandom random, char[] alphabet, int[][] frequencyMatrix)
 		{
+			if (alphabet.Length != frequencyMatrix.Length)
+			{
+				throw new ArgumentException(
+					"alphabet and frequencyMatrix's row counts are different, but should be equal",
+					nameof(frequencyMatrix));
+			}
+
+			var columnCounts = frequencyMatrix.Select(row => row.Length).ToArray();
+			if (columnCounts.Distinct().Count() != 1)
+			{
+				throw new ArgumentException(
+					"frequencyMatrix's columns are of inconsistent sizes",
+					nameof(frequencyMatrix));
+			}
+
+			if (columnCounts[0] != alphabet.Length)
+			{
+				throw new ArgumentException(
+					"alphabet and frequencyMatrix's column counts are different, but should be equal",
+					nameof(frequencyMatrix));
+			}
+
 			_alphabet = alphabet;
 			_frequencyMatrix = frequencyMatrix;
 			_random = random;
