@@ -8,7 +8,7 @@ namespace CharGenerator
 	{
 		private static readonly Random Random = new Random();
 
-		public static T Spin<T>(IList<T> items, IList<double> weights, out int idx)
+		public static T Spin<T>(IList<T> items, IList<int> weights, out int idx)
 		{
 			if (items.Count != weights.Count)
 			{
@@ -33,6 +33,6 @@ namespace CharGenerator
 			throw new Exception("Случайное число оказалось вне отрезка");
 		}
 
-		public static T Spin<T>(IList<T> items, IList<double> weights) => Spin(items, weights, out _);
+		public static T Spin<T>(IList<T> items, IList<int> weights) => Spin(items, weights, out _);
 	}
 }

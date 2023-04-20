@@ -24,7 +24,7 @@ namespace CharGenerator
 				.Split(new[] {"\r\n", "\n"}, StringSplitOptions.None)
 				.Select(row => row
 					.Split(' ')
-					.Select(double.Parse)
+					.Select(int.Parse)
 					.ToArray())
 				.ToArray();
 

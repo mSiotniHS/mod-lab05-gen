@@ -6,9 +6,9 @@ namespace CharGenerator
 	public sealed class BigramBasedTextGenerator
 	{
 		private readonly char[] _alphabet;
-		private readonly double[][] _frequencyMatrix;
+		private readonly int[][] _frequencyMatrix;
 
-		public BigramBasedTextGenerator(char[] alphabet, double[][] frequencyMatrix)
+		public BigramBasedTextGenerator(char[] alphabet, int[][] frequencyMatrix)
 		{
 			_alphabet = alphabet;
 			_frequencyMatrix = frequencyMatrix;
